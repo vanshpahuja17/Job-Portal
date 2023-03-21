@@ -1,0 +1,405 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title> Grievance | CareerLink </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/icon/favicon.ico' %}">
+
+    <!-- Plugins css -->
+    <link href="{% static 'assets_new/plugins/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets_new/plugins/datatables/responsive.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets_new/plugins/datatables/buttons.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets_new/plugins/datatables/select.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="{% static 'assets_new/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets_new/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets_new/css/theme.min.css' %}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <div class="header-border"></div>
+        {% include 'app/header-new.html' %}
+
+        <!-- ========== Left Sidebar Start ========== -->
+        {% include 'app/sidebar-new.html' %}
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Grievances</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                                        <li class="breadcrumb-item active">Grievances</li>
+                                    </ol>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>     
+                    <!-- end page title -->
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'success' %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% else %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% comment %} <br>
+                        <div class="row">
+                            <div class="col-xl-12 text-right">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">File an FIR</button>
+                            </div>
+                        </div>
+                    <br> {% endcomment %}
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12 mb-4">
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalCenter">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modal-title"></h5>
+                                                            <button type="button" class="close"
+                                                                data-dismiss="modal"><span>×</span></button>
+                                                        </div>
+                                                        <div class="modal-body needs-validation" novalidate="">
+                                                            <form id="modal-form" method="POST" action="{% url 'grievance-user' %}">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" value="sdgvsr" name="abc">
+                                                                    <div class="form-row">
+                                                                        <div class="col-md-12 mb-3">
+                                                                            <label for="name">Name</label>
+                                                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required="">
+                                                                            <div class="valid-feedback">
+                                                                                Looks good!
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12 mb-3">
+                                                                            <label for="company">Company Name</label>
+                                                                            <input type="text" class="form-control" id="company" name="company" placeholder="Enter name" required="" list="companies">
+                                                                            <datalist id="companies">
+                                                                                {% for i in companies %}
+                                                                                    <option value="{{i.name}}">{{i.id}}</option>
+                                                                                {% endfor %}
+                                                                            </datalist>
+                                                                            <div class="valid-feedback">
+                                                                                Looks good!
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12 mb-3">
+                                                                            <label for="description">Description</label>
+                                                                            <div class="input-group">
+                                                                                <textarea class="form-control" id="description" name="desc" placeholder="Describe your grievance" aria-label="With textarea" required></textarea>
+                                                                                <div class="valid-feedback">
+                                                                                    Looks good!
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {% comment %} <div class="col-md-12 mb-3">
+                                                                            <label for="description">Comments</label>
+                                                                            <div class="input-group">
+                                                                                <textarea class="form-control" id="comments" name="comments" placeholder="Describe your grievance" aria-label="With textarea"></textarea>
+                                                                                <div class="valid-feedback">
+                                                                                    Looks good!
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> {% endcomment %}
+                                                                    </div>
+                                                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h4 class="header-title" style="display: inline">Grievances</h4>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                onclick="addClicked()" data-target="#exampleModalCenter"
+                                                style="float: right;">Add Grievance</button>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                    <table id="data-table" class="table table-striped nowrap" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Company</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <tr>
+                                                <td id="sort1"></td>
+                                                <td id="sort2"></td>
+                                                <td id="sort3"></td>
+                                                <td id="sort4"></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for g in grv %}
+                                        <tr>
+                                            <td>{{g.Name}}</td>
+                                            <td>{{g.Company.name}}</td>
+                                            <td>{{g.Description}}</td>
+                                            <td>{{g.Status}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row-->
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            {% include 'app/footer.html' %}
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="{% static 'assets_new/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets_new/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets_new/js/metismenu.min.js' %}"></script>
+    <script src="{% static 'assets_new/js/waves.js' %}"></script>
+    <script src="{% static 'assets_new/js/simplebar.min.js' %}"></script>
+
+    <!-- third party js -->
+    <script src="{% static 'assets_new/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/buttons.print.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/dataTables.keyTable.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/pdfmake.min.js' %}"></script>
+    <script src="{% static 'assets_new/plugins/datatables/vfs_fonts.js' %}"></script>
+    <!-- third party js ends -->
+
+    <script src="{% static 'assets_new/pages/validation-demo.js' %}"></script>
+
+    <!-- Datatables init -->
+    <script src="{% static 'assets_new/pages/datatables-demo.js' %}"></script>
+
+    <!-- App js -->
+    <script src="{% static 'assets_new/js/theme.js' %}"></script>
+
+    <script>
+        function addClicked() {
+            console.log('clicked')
+            document.getElementById('modal-title').innerHTML = 'Add';
+            document.getElementById('modal-form').setAttribute('action', '/grievance-user/');
+        }
+
+        function updateClicked(i) {
+            console.log('clicked')
+            document.getElementById('modal-title').innerHTML = 'Update';
+            document.getElementById('modal-form').setAttribute('action', '/grievance-user/');
+        }
+
+    </script>
+
+    <!-- Datatable Initialization -->
+    <script>
+        $(document).ready(function() {
+        
+            var table = $('#data-table').DataTable({
+                orderCellsTop: true,
+                fixedHeader: true,
+                lengthChange: !1,
+                dom: 'Blrtip',
+                buttons:[ 'csv', 
+                    {
+                        extend: 'excelHtml5',
+                        autoFilter: true,
+                        sheetName: 'Sheet 1',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        pageSize: 'TABLOID',
+                        // text: '<i class="fa fa-file-pdf-o"></i>',
+                        exportOptions: {
+                            columns: ':visible'
+                        },
+                        customize: function (doc) {
+                            doc.content.splice(0,1);
+                            var now = new Date();
+                            var jsDate = now.getDate()+'-'+(now.getMonth()+1)+'-'+now.getFullYear();
+                            var logo = 'data:image/png;base64,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'
+                            
+                            doc.pageMargins = [20,60,20,50];
+                            doc.defaultStyle.fontSize = 10;
+                            doc.styles.tableHeader.fontSize = 10;
+                            doc['header']=(function() {
+                                return {
+                                    columns: [
+                                        {
+                                            image: logo,
+                                            width: 24
+                                        },
+                                        {
+                                            alignment: 'left',
+                                            italics: true,
+                                            text: 'Grievance',
+                                            fontSize: 18,
+                                            margin: [10,0]
+                                        },
+                                        {
+                                            alignment: 'right',
+                                            fontSize: 14,
+                                            text: 'CareerLink | Grievance'
+                                        }
+                                    ],
+                                    margin: 20
+                                }
+                            });
+                            doc['footer']=(function(page, pages) {
+                                return {
+                                    columns: [
+                                        {
+                                            alignment: 'left',
+                                            fontSize: 14,
+                                            text: ['Created on: ', { text: jsDate.toString() }]
+                                        },
+                                        {
+                                            alignment: 'right',
+                                            fontSize: 14,
+                                            text: ['page ', { text: page.toString() },	' of ',	{ text: pages.toString() }]
+                                        }
+                                    ],
+                                    margin: 20
+                                }
+                            });
+                            var objLayout = {};
+                            objLayout['hLineWidth'] = function(i) { return .5; };
+                            objLayout['vLineWidth'] = function(i) { return .5; };
+                            objLayout['hLineColor'] = function(i) { return '#aaa'; };
+                            objLayout['vLineColor'] = function(i) { return '#aaa'; };
+                            objLayout['paddingLeft'] = function(i) { return 4; };
+                            objLayout['paddingRight'] = function(i) { return 4; };
+                            doc.content[0].layout = objLayout;
+                        }
+                    }, 'print', 'pageLength'
+                ],
+                initComplete: function () {
+                    this.api().columns(0).every( function ()
+                    {
+                        var column = this;
+                        var select = $(' <select class="form-control"><option value="">All</option></select>')
+                            .appendTo('#data-table thead tr #sort1')
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search( val ? '^'+val+'$' : '', true, false )
+                                    .draw();
+                            } );
+
+                        column.data().unique().sort().each( function ( d, j ) {
+                            select.append( '<option value="'+d+'">'+d+'</option>' )
+                        });
+                    })
+                    this.api().columns(1).every( function ()
+                    {
+                        var column = this;
+                        var select = $(' <select class="form-control"><option value="">All</option></select>')
+                            .appendTo('#data-table thead tr #sort2')
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search( val ? '^'+val+'$' : '', true, false )
+                                    .draw();
+                            } );
+
+                        column.data().unique().sort().each( function ( d, j ) {
+                            select.append( '<option value="'+d+'">'+d+'</option>' )
+                        });
+                    })
+                    this.api().columns(3).every( function ()
+                    {
+                        var column = this;
+                        var select = $(' <select class="form-control"><option value="">All</option></select>')
+                            .appendTo('#data-table thead tr #sort4')
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search( val ? '^'+val+'$' : '', true, false )
+                                    .draw();
+                            } );
+
+                        column.data().unique().sort().each( function ( d, j ) {
+                            select.append( '<option value="'+d+'">'+d+'</option>' )
+                        });
+                    })
+                },
+            });
+            table.buttons().container().appendTo( '#data-table_wrapper .col-md-6:eq(0)' );
+
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,273 @@
+{% load static %}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Grievance - CareerLink</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/icon/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/metisMenu.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.min.css' %}">
+    <!-- amcharts css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css"
+        media="all" />
+    <!-- Start datatable css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'assets/css/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/default-css.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+    <!-- modernizr css -->
+    <script src="{% static 'assets/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- page container area start -->
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        {% include 'app/sidebar.html' %}
+        <!-- sidebar menu area end -->
+        <!-- main content area start -->
+        <div class="main-content">
+            <!-- header area start -->
+            {% include 'app/navbar.html' %}
+            <!-- header area end -->
+            <!-- page title area start -->
+            <div class="page-title-area">
+                <div class="row align-items-center">
+                    <div class="col-sm-12 py-4">
+                        <div class="breadcrumbs-area clearfix">
+                            <h4 class="page-title pull-left">Dashboard</h4>
+                            <ul class="breadcrumbs pull-right">
+                                <li><a href="index.html">Home</a></li>
+                                <li><span>Datatable</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-6 clearfix">
+                        <div class="user-profile pull-right">
+                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Message</a>
+                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" href="#">Log Out</a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- page title area end -->
+            <div class="main-content-inner">
+                <div class="row">
+                    <div class="col-12 mt-5">
+                        <div>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              {{ message }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                          </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 mb-4">
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalCenter">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modal-title"></h5>
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal"><span>×</span></button>
+                                                    </div>
+                                                    <div class="modal-body needs-validation" novalidate="">
+                                                        <form id="modal-form" method="POST" action="{% url 'grievance-admin' %}">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" value="sdgvsr" name="abc">
+                                                                <div class="form-row">
+                                                                    <div class="col-md-12 mb-3">
+                                                                        <label for="name">Name</label>
+                                                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required="">
+                                                                        <div class="valid-feedback">
+                                                                            Looks good!
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12 mb-3">
+                                                                        <label for="description">Description</label>
+                                                                        <div class="input-group">
+                                                                            <textarea class="form-control" id="description" name="desc" placeholder="Describe your grievance" aria-label="With textarea" required></textarea>
+                                                                            <div class="valid-feedback">
+                                                                                Looks good!
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    {% comment %} <div class="col-md-12 mb-3">
+                                                                        <label for="description">Comments</label>
+                                                                        <div class="input-group">
+                                                                            <textarea class="form-control" id="comments" name="comments" placeholder="Describe your grievance" aria-label="With textarea"></textarea>
+                                                                            <div class="valid-feedback">
+                                                                                Looks good!
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> {% endcomment %}
+                                                                </div>
+                                                                <button class="btn btn-primary" type="submit">Submit</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="header-title" style="display: inline">Grievances</h4>
+                                        {% comment %} <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            onclick="addClicked()" data-target="#exampleModalCenter"
+                                            style="float: right;">Add Grievance</button> {% endcomment %}
+                                    </div>
+                                </div>
+                                <table id="dataTable" class="text-center">
+                                    <thead class="bg-light text-capitalize">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for g in grv %}
+                                        <tr>
+                                            <td>{{g.Name}}</td>
+                                            <td>{{g.Description}}</td>
+                                            <td>{{g.Status}}</td>
+                                            <td style="display: flex; justify-content: space-around;">
+                                                <i class="fa fa-pencil" onclick="updateClicked('1')" data-toggle="modal"
+                                                    data-target="#exampleModalCenter">
+                                                </i>
+                                                <i class="fa fa-trash" onclick="deleteClicked('1')"></i>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content area end -->
+        <!-- footer area start-->
+        {% include 'app/footer.html' %}
+        <!-- footer area end-->
+    </div>
+    <!-- page container area end -->
+    <!-- jquery latest version -->
+    <script src="{% static 'assets/js/vendor/jquery-2.2.4.min.js' %}"></script>
+    <!-- bootstrap 4 js -->
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/metisMenu.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Start datatable js -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+    <!-- others plugins -->
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/scripts.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var table = $('#dataTable').DataTable({
+                responsive: true,
+                scrollX: true,
+            })
+        })
+    </script>
+
+    <script>
+        function addClicked() {
+            console.log('clicked')
+            document.getElementById('modal-title').innerHTML = 'Add';
+            document.getElementById('modal-form').setAttribute('action', '/grievance-admin/');
+        }
+
+        function updateClicked(i) {
+            console.log('clicked')
+            document.getElementById('modal-title').innerHTML = 'Update';
+            document.getElementById('modal-form').setAttribute('action', '/grievance-admin/');
+        }
+
+        function deleteClicked(i) {
+            console.log('clicked')
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success ml-2',
+                    cancelButton: 'btn btn-danger mr-2'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire(
+                        'Deleted!',
+                        'Your grievance has been deleted.',
+                        'success'
+                    )
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your grievance is safe :)',
+                        'error'
+                    )
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

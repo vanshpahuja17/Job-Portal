@@ -1,0 +1,6 @@
+env
+app/migrations
+app/__pycache__
+syrus23/__pycache__
+syrus23/.env
+db.sqlite3

@@ -1,0 +1,574 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard | CareerLink</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/icon/favicon.ico' %}">
+
+    <!-- App css -->
+    <link href="{% static 'assets_new/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets_new/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets_new/css/theme.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <style>
+        --bs-blue: #1c84ee;
+        --bs-indigo: #564ab1;
+        --bs-red: #ef6767;
+        --bs-orange: #fa5f1c;
+        --bs-yellow: #ffcc5a;
+        --bs-green: #34c38f;
+        --bs-teal: #050505;
+        --bs-cyan: #16daf1;
+        --bs-black: #000;
+        --bs-gray: #74788d;
+        --bs-gray-dark: #343a40;
+        --bs-gray-100: #f8f9fa;
+        --bs-gray-200: #e9e9ef;
+        --bs-gray-300: #f6f6f6;
+        --bs-gray-400: #ced4da;
+        --bs-gray-500: #adb5bd;
+        --bs-gray-600: #74788d;
+        --bs-gray-700: #495057;
+        --bs-gray-800: #343a40;
+        --bs-gray-900: #2b3940;
+        --bs-primary: #1c84ee;
+        --bs-secondary: #74788d;
+        --bs-success: #34c38f;
+        --bs-info: #16daf1;
+        --bs-warning: #ffcc5a;
+        --bs-purple: #6f42c1;
+        --bs-danger: #ef6767;
+        --bs-pink: #e83e8c;
+        --bs-primary-rgb: 28,132,238;
+        --bs-secondary-rgb: 116,120,141;
+        --bs-success-rgb: 52,195,143;
+        --bs-info-rgb: 22,218,241;
+        --bs-warning-rgb: 255,204,90;
+        --bs-purple-rgb: 111,66,193;
+        --bs-danger-rgb: 239,103,103;
+        --bs-pink-rgb: 232,62,140;
+        --bs-white-rgb: 255,255,255;
+        --bs-black-rgb: 0,0,0;
+        --bs-body-bg-rgb: 244,245,248;
+        --bs-font-sans-serif: "Be Vietnam Pro",sans-serif;
+        --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+        --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+        --bs-body-font-family: var(--bs-font-sans-serif);
+        --bs-body-font-size: 0.8125rem;
+        --bs-body-font-weight: 400;
+        --bs-body-line-height: 1.5;
+        --bs-border-width: 1px;
+        --bs-border-style: solid;
+        --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+        --bs-border-radius: 0.25rem;
+        --bs-border-radius-sm: 0.2rem;
+        --bs-border-radius-lg: 0.4rem;
+        --bs-border-radius-xl: 1rem;
+        --bs-border-radius-2xl: 2rem;
+        --bs-border-radius-pill: 50rem;
+        --bs-code-color: #e83e8c;
+        --bs-highlight-bg: #fcf8e3;
+        --bs-sidebar-bg: #ffffff;
+        --bs-sidebar-menu-item-color: #545a6d;
+        --bs-sidebar-menu-sub-item-color: #545a6d;
+        --bs-sidebar-menu-item-icon-color: #545a6d;
+        --bs-sidebar-menu-item-hover-color: rgba(var(--bs-primary-rgb), 1);
+        --bs-sidebar-menu-item-active-color: rgba(var(--bs-primary-rgb), 1);
+        --bs-sidebar-menu-item-active-bg-color: #f3f8fb;
+        --bs-sidebar-menu-item-active-bg-color-dark: #293552;
+        --bs-sidebar-alert: rgba(81,86,190,0.1);
+        --bs-sidebar-dark-bg: #2C302E;
+        --bs-sidebar-dark-menu-item-color: #99a4b1;
+        --bs-sidebar-dark-menu-sub-item-color: #858d98;
+        --bs-sidebar-dark-menu-item-icon-color: #858d98;
+        --bs-sidebar-dark-menu-item-hover-color: #ffffff;
+        --bs-sidebar-dark-menu-item-active-color: #ffffff;
+        --bs-header-bg: #ffffff;
+        --bs-header-item-color: #555b6d;
+        --bs-header-dark-bg: rgba(var(--bs-primary-rgb), 1);
+        --bs-header-dark-item-color: #e9ecef;
+        --bs-topbar-search-bg: rgba(243,243,249,.1);
+        --bs-topbar-dark-search-bg: #363a38;
+        --bs-search-width: 0px;
+        --bs-search-border-color: #e9e9ef;
+        --bs-box-shadow: 0 0.25rem 0.75rem rgba(18,38,63,.08);
+        --bs-footer-bg: #ffffff;
+        --bs-footer-color: #74788d;
+        --bs-topnav-bg: #fbfaff;
+        --bs-topnav-item-color: #ced4da;
+        --bs-topnav-item-color-active: #fff;
+        --bs-menu-item-color: #545a6d;
+        --bs-menu-item-active-color: rgba(var(--bs-primary-rgb), 1);
+        --bs-body-bg: #f4f5f8;
+        --bs-body-color: #495057;
+        --bs-body-color-rgb: 73,80,87;
+        --bs-apex-grid-color: #f8f9fa;
+        --bs-display-none: none;
+        --bs-display-block: block;
+        --bs-card-title-desc: #74788d;
+        --bs-light: #e9e9ef;
+        --bs-light-rgb: 233,233,239;
+        --bs-dark: #2b3940;
+        --bs-dark-rgb: 43,57,64;
+        --bs-text-muted: #74788d;
+        --bs-white: #fff;
+        --bs-link-color: #1c84ee;
+        --bs-link-hover-color: #1c84ee;
+        --bs-border-color: #e9e9ef;
+        --bs-card-logo-dark: block;
+        --bs-card-logo-light: none;
+        --bs-table-color: #495057;
+        --bs-boxed-body-bg: #f0f0f0;
+        --bs-toast-background-color: rgba(255, 255, 255, 0.85);
+        --bs-toast-border-color: rgba(0, 0, 0, 0.1);
+        --bs-toast-header-border-color: rgba(0, 0, 0, 0.05);
+        --bs-input-bg: #fff;
+        --bs-input-group-addon-border-color: #ced4da;
+        --bs-input-border: #ced4da;
+        --bs-input-border-color: #ced4da;
+        --bs-input-focus-border: #8ec2f7;
+        --bs-input-disabled-bg: #e9e9ef;
+        --bs-input-placeholder-color: #74788d;
+        --bs-input-group-addon-bg: #e9e9ef;
+        --bs-input-check-border: var(--bs-input-border);
+        font-family: var(--bs-body-font-family);
+        font-size: var(--bs-body-font-size);
+        font-weight: var(--bs-body-font-weight);
+        line-height: var(--bs-body-line-height);
+        color: var(--bs-body-color);
+        text-align: var(--bs-body-text-align);
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+        box-sizing: border-box;
+        --bs-gutter-x: 24px;
+        --bs-gutter-y: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1 * var(--bs-gutter-y));
+        margin-right: calc(-.5 * var(--bs-gutter-x));
+        margin-left: calc(-.5 * var(--bs-gutter-x));
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <div class="header-border"></div>
+        {% include 'app/header-new.html' %}
+
+        <!-- ========== Left Sidebar Start ========== -->
+        {% include 'app/sidebar-new.html' %}
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Dashboard</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item active">Dashboard</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+
+                    {% if request.session.role == 'applicant' %}
+
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h1 class="mb-0">My Applications</h1>
+
+                                <div class="page-title-right">
+                                    <h4><a class="active" href="{% url 'my-applications' %}">View All Applications</a></h4>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                {% for i in myApplications %}
+                                    <div class="col-lg-4 col-md-6 mb-2">
+                                        <div class="card border">
+                                            <div class="card-header bg-transparent border-primary">
+                                                <h5 class="my-0 text-primary">{{ i.jobId.name }} ({{ i.jobId.companyId.name }})</h5>
+                                                <hr class="mb-0 border-primary">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Job Type: {{ i.jobId.jobType }}</h5>
+                                                <p class="card-text">Duration: {{ i.jobId.duration }}</p>
+                                                <p class="card-text">Stipend: {{ i.jobId.stipend }}</p>
+                                                <p class="card-text">Location: {{ i.jobId.location }}</p>
+                                                {% if i.chatExists %}
+                                                    <button class="btn btn-primary">Chat</button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div><!-- end col -->
+                                {% endfor %}
+
+                            </div>
+                            <!-- <style>
+                                @media (min-width: 768px) {
+                                    .carousel-inner {
+                                        display: flex;
+                                    }
+
+                                    .carousel-item {
+                                        margin-right: 0;
+                                        flex: 0 0 33.333333%;
+                                        display: block;
+                                    }
+                                }
+
+                                .carousel-inner {
+                                    padding: 1em;
+                                }
+
+                                .card {
+                                    margin: 0 .5em;
+                                    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+                                    border: none;
+                                }
+
+                                .carousel-control-prev, .carousel-control-next{
+                                    color: black;
+                                    /* width: 6vh;
+                                    height: 6vh;
+                                    border-radius: 50%;
+                                    top: 50%;
+                                    transform: translateY(-50%); */
+                                }
+
+
+                                #datatable-buttons_wrapper .col-md-6:first-child {
+                                    display: flex;
+                                    flex-direction: row-reverse;
+                                    justify-content: start;
+                                }
+
+                                #datatable-buttons_wrapper .dt-buttons.btn-group {
+                                    margin-right: 10px;
+                                }
+                            </style> -->
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h1 class="mb-0">Recommended Jobs</h1>
+
+                                <div class="page-title-right">
+                                    <h4><a class="active" href="{% url 'job-list' %}">View All Jobs</a></h4>
+                                </div>
+
+                            </div>
+
+                            <div id="carouselExampleControls" class="carousel " data-ride="carousel">
+                                <div class="carousel-inner" role="listbox">
+                                    {% for job in jobs %}
+                                    <div class="carousel-item active">
+                                        <div class="card">
+                                            <h5 class="card-header bg-transparent border-bottom text-uppercase">Featured</h5>
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{job.name}}</h4>
+                                                <p class="card-text">{{job.description}}</p>
+                                                <hr class="mb-3 border-primary">
+                                                <h6 class="card-text">Company : {{job.companyId.name}}</h6>
+                                                <p class="card-text">Job Type: {{ job.jobType }}</p>
+                                                <p class="card-text">Duration: {{ job.duration }}</p>
+                                                <p class="card-text">Stipend: {{ job.stipend }}</p>
+                                                <p class="card-text">Location: {{ job.location }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div> 
+                            <style>
+                                @media (min-width: 768px) {
+                                    .carousel-inner {
+                                        display: flex;
+                                    }
+
+                                    .carousel-item {
+                                        margin-right: 0;
+                                        flex: 0 0 33.333333%;
+                                        display: block;
+                                    }
+                                }
+
+                                .carousel-inner {
+                                    padding: 1em;
+                                }
+
+                                .card {
+                                    margin: 0 .5em;
+                                    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+                                    border: none;
+                                }
+
+                                .carousel-control-prev, .carousel-control-next{
+                                    color: black;
+                                    /* width: 6vh;
+                                    height: 6vh;
+                                    border-radius: 50%;
+                                    top: 50%;
+                                    transform: translateY(-50%); */
+                                }
+
+
+                                #datatable-buttons_wrapper .col-md-6:first-child {
+                                    display: flex;
+                                    flex-direction: row-reverse;
+                                    justify-content: start;
+                                }
+
+                                #datatable-buttons_wrapper .dt-buttons.btn-group {
+                                    margin-right: 10px;
+                                }
+                            </style>
+                        </div>
+                    </div>
+
+                    {% endif %}
+
+                    <div class="row mb-3">
+                        <div class="col-md-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-header text-center"><h4>Number of Applications filled today</h4></div>
+                                <div class="card-body">
+                                    <canvas id="doughnut"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-header text-center"><h4>Number of Jobs/Companies/Candidates in System</h4></div>
+                                <div class="card-body">
+                                    <canvas id="line"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-header text-center"><h4>Number of Jobs accepted/rejected</h4></div>
+                                <div class="card-body">
+                                    <canvas id="pie"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            {% include 'app/footer-new.html' %}
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="{% static 'assets_new/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets_new/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets_new/js/metismenu.min.js' %}"></script>
+    <script src="{% static 'assets_new/js/waves.js' %}"></script>
+    <script src="{% static 'assets_new/js/simplebar.min.js' %}"></script>
+
+    <!-- Chart Js-->
+    <script src="{% static 'assets_new/plugins/chart-js/chart.min.js' %}"></script>
+
+    <!-- Chart Custom Js-->
+    <script src="{% static 'assets_new/pages/chartjs-demo.js' %}"></script>
+
+    <!-- App js -->
+    <script src="{% static 'assets_new/js/theme.js' %}"></script>
+
+
+    <script>
+        const config1 = {
+            type: 'doughnut',
+            data: {
+                labels: ['today', 'uptilNow'],
+                datasets: [{
+                    label: 'Applications filled',
+                    data: ['{{today}}', '{{uptilNow}}'],
+                    backgroundColor: [
+                    "#34c38f", "#1c84ee", "#ef6767", "#16daf1", "#ffcc5a"
+                    // '#86e3ce', '#d0e6a5', '#ffdd94', '#fa897b', '#ccabd8'
+                    ],
+                    hoverOffset: 4
+                }]
+            }
+        };
+        const doughnut = new Chart(
+            document.getElementById('doughnut'),
+            config1
+        );
+
+        
+        const labels = [
+            'Total Jobs',
+            'Total Companies',
+            'Total Candidates',
+        ];
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Number of Jobs/Companies/Candidates in System',
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)'
+            ],
+            borderWidth: 1,
+            data: ['{{totalJobs}}', '{{totalCompanies}}', '{{totalCandidates}}'],
+          }]
+        };
+        const config2 = {
+            type: 'bar',
+            data: data,
+            maintainAspectRatio: false,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            },
+        };
+        const line = new Chart(
+            document.getElementById('line'),
+            config2
+        );
+
+
+
+        const config3 = {
+            type: 'pie',
+            data: {
+                labels: [
+                    'Application Accepted',
+                    'Application Rejected',
+                    'Application not opened'
+                ],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: ['{{jobAccepted}}', '{{jobRejected}}', '{{appNotViewed}}'],
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+        };
+
+        const pie = new Chart(
+            document.getElementById('pie'),
+            config3
+        );
+
+
+
+        var carouselWidth = $(".carousel-inner")[0].scrollWidth;
+        var cardWidth = $(".carousel-item").width();
+        var scrollPosition = 0;
+        $(".carousel-control-next").on("click", function () {
+            if (scrollPosition < (carouselWidth - cardWidth * 4)) { //check if you can go any further
+                scrollPosition += cardWidth;  //update scroll position
+                $(".carousel-inner").animate({ scrollLeft: scrollPosition }, 600); //scroll left
+            }
+        });
+        $(".carousel-control-prev").on("click", function () {
+            if (scrollPosition > 0) {
+                scrollPosition -= cardWidth;
+                $(".carousel-inner").animate(
+                    { scrollLeft: scrollPosition },
+                    600
+                );
+            }
+        });
+
+        var multipleCardCarousel = document.querySelector(
+            "#carouselExampleControls"
+        );
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            //rest of the code
+            var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+                interval: true,
+                wrap: false,
+            });
+        } else {
+            $(multipleCardCarousel).addClass("slide");
+        }
+    </script>
+
+
+</body>
+
+</html>

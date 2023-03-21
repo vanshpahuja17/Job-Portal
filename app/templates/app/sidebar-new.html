@@ -1,0 +1,78 @@
+{% load static %}
+
+<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <div class="navbar-brand-box">
+            <a href="{% url 'dashboard' %}" class="logo">
+                <img src="{% static 'assets/images/icon/logo.png' %}" width="100%">
+            </a>
+        </div>
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Menu</li>
+
+                <li>
+                    <a href="{% url 'dashboard' %}" class="waves-effect"><i class="mdi mdi-home-variant"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>Dashboard</span></a>
+                </li>
+                {% if request.session.role == 'company' %}
+                <li>
+                    <a href="{% url 'jobs' %}" class="waves-effect"><i class="mdi mdi-file-document-box-check-outline"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>Add Job Opening</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'view-applications' %}" class="waves-effect"><i class="mdi mdi-file-document-box-check-outline"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>View Job Applications</span></a>
+                </li>
+                {% endif %}
+                {% if request.session.role == 'applicant' %}
+                <li>
+                    <a href="{% url 'job-list' %}" class="waves-effect"><i class="mdi mdi-human-child"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>Apply Job</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'my-applications' %}" class="waves-effect"><i class="mdi mdi-file-document"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>My Applications</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'grievance-user' %}" class="waves-effect"><i class="mdi mdi-file-document-edit-outline"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>Grievances</span></a>
+                </li>
+                {% endif %}
+                {% if request.session.role == 'admin' %}
+                <li>
+                    <a href="{% url 'grievance-admin' %}" class="waves-effect"><i class="mdi mdi-file-document-edit-outline"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>Grievances</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'company' %}" class="waves-effect"><i class="mdi mdi-domain"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>Company</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'update-points' %}" class="waves-effect"><i class="mdi mdi-coins"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>Update Points</span></a>
+                </li>
+                
+                <li>
+                    <a href="{% url 'applicants' %}" class="waves-effect"><i class="mdi mdi-skull"></i><span
+                        class="badge badge-pill badge-primary float-right"></span><span>Applicants</span></a>
+                </li>
+                {% endif %}
+                
+                    
+                <li>
+                    <a href="{% url 'chat' %}">
+                        <i class="mdi mdi-receipt"></i><span>Chats</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>
